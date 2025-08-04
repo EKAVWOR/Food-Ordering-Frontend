@@ -48,6 +48,7 @@ const SignUp = () => {
           placeholder="username"
           className="border border-orange-300 p-2 rounded"
           required
+          type="name"
         />
         <input
           name="email"

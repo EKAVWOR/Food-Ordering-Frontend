@@ -5,7 +5,7 @@ import Menu from "./pages/Menu";
 import Cart from "./pages/Cart";
 import ThankYou from "./pages/ThankYou";
 import Checkout from "./pages/Checkout";
-
+import Admin from "./pages/Admin";
 import { CartProvider } from "./context/CartContext";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
@@ -23,6 +23,7 @@ const App = () => {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/admin" element={<Admin />} />
           <Route path="/thank-you" element={<ThankYou />} />
         </Routes>
       </Router>

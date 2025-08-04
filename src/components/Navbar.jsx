@@ -1,14 +1,36 @@
 // src/components/Navbar.jsx
-import { Link } from "react-router-dom";
-import { ShoppingCart, Home, Menu, Search, User } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { ShoppingCart, Home, Menu, Search, User, LogOut } from "lucide-react";
 import { useContext, useState } from "react";
 import { CartContext } from "../context/CartContext";
 
 const Navbar = () => {
   const { cartItems } = useContext(CartContext);
   const [search, setSearch] = useState("");
+  const navigate = useNavigate();
 
   const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+
+  // ✅ Dashboard click handler
+  const handleDashboardClick = () => {
+    const token = localStorage.getItem("token");
+    const role = localStorage.getItem("role");
+
+    if (!token) {
+      navigate("/signin");
+    } else if (role === "admin") {
+      navigate("/admin");
+    } else {
+      navigate("/dashboard");
+    }
+  };
+
+  // ✅ Logout handler
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
+    navigate("/signin");
+  };
 
   return (
     <nav className="bg-orange-600 text-white shadow sticky top-0 z-50">
@@ -53,12 +75,21 @@ const Navbar = () => {
               )}
             </Link>
 
-            <Link
-              to="/dashboard"
+            {/* ✅ Dashboard link as a button */}
+            <button
+              onClick={handleDashboardClick}
               className="flex items-center gap-1 hover:bg-orange-700 px-3 py-2 rounded-full transition-colors duration-200"
             >
               <User size={20} /> <span className="hidden sm:inline">Dashboard</span>
-            </Link>
+            </button>
+
+            {/* ✅ Logout button */}
+            <button
+              onClick={handleLogout}
+              className="flex items-center gap-1 hover:bg-orange-700 px-3 py-2 rounded-full transition-colors duration-200"
+            >
+              <LogOut size={20} /> <span className="hidden sm:inline">Logout</span>
+            </button>
           </div>
 
           {/* Search */}

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import {Link} from "react-router-dom";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const SignIn = () => {
   const [formData, setFormData] = useState({
@@ -16,38 +18,62 @@ const SignIn = () => {
     setFormData({...formData, [e.target.name]: e.target.value});
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const res = await axios.post("http://localhost:5000/api/signin", formData);
-  //     localStorage.setItem("token", res.data);
-  //     setMessage("Login successful");
-  //     setSuccess(true);
-  //     setTimeout(() => {
-  //       navigate("/dashboard");
-  //     }, 1500);
-  //   } catch (err) {
-  //     console.error(err);
-  //     setMessage(err.response.data.message || "Login failed");
-  //     setSuccess(false);
-  //   }
+  
 
+
+ 
+
+  // const handleSubmit = async (e) => {
+  // e.preventDefault();
+  // try {
+  //   const res = await axios.post("http://localhost:5000/api/signin", formData);
+  //   localStorage.setItem("token", res.data.token);
+  //   localStorage.setItem("role", res.data.role);
+
+  //   setMessage("Login successful");
+  //   setSuccess(true);
+
+  //   setTimeout(() => {
+  //     if (res.data.role === "admin") {
+  //       navigate("/admin");  // 👈 admin goes here
+  //     } else {
+  //       navigate("/checkout");   // 👈 normal user goes here
+  //     }
+  //   }, 1500);
+
+  // } catch (err) {
+  //   console.error(err);
+  //   setMessage(err.response?.data?.message || "Login failed");
+  //   setSuccess(false);
+  // }
 
   const handleSubmit = async (e) => {
   e.preventDefault();
   try {
     const res = await axios.post("http://localhost:5000/api/signin", formData);
-    // Save token and user info
     localStorage.setItem("token", res.data.token);
-    localStorage.setItem("userId", res.data.userId);
-    localStorage.setItem("name", res.data.name);
-    localStorage.setItem("email", res.data.email);
+    localStorage.setItem("role", res.data.role);
+    localStorage.setItem("userId", res.data.userId)
+    
 
     setMessage("Login successful");
     setSuccess(true);
+
+    // Get cart from localStorage (or wherever you store it)
+    const storedCart = JSON.parse(localStorage.getItem("cartItems") || "[]");
+
     setTimeout(() => {
-      navigate("/checkout");
+      if (res.data.role === "admin") {
+        navigate("/admin");
+      } else {
+        if (storedCart.length > 0) {
+          navigate("/checkout");
+        } else {
+          navigate("/dashboard");
+        }
+      }
     }, 1500);
+
   } catch (err) {
     console.error(err);
     setMessage(err.response?.data?.message || "Login failed");
@@ -55,10 +81,15 @@ const SignIn = () => {
   }
 
 
+
+
 };
 
   return (
+    <>
+      <Navbar/>
     <div className="flex items-center justify-center min-h-screen bg-orange-100">
+      
       <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow w-80 flex flex-col gap-4">
         <h2 className="text-2xl font-bold mb-4">Sign In</h2>
         <input
@@ -93,6 +124,9 @@ const SignIn = () => {
       </form>
       
     </div>
+    <Footer/>
+    </>
+
   );
 };
 
