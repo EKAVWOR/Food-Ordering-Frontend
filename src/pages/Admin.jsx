@@ -19,13 +19,13 @@ const Admin = () => {
   }, []);
 
   const fetchOrders = async () => {
-    const res = await fetch("http://localhost:5000/api/fetchorder");
+    const res = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEDURL}/api/fetchorder`);
     const data = await res.json();
     setOrders(data.users);
   };
 
   const fetchMeals = async () => {
-    const res = await fetch("http://localhost:5000/api/meals");
+    const res = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEDURL}/api/meals`);
     const data = await res.json();
     setMeals(data.meals);
   };
@@ -37,7 +37,7 @@ const Admin = () => {
   formData.append("price", newMeal.price);
   formData.append("image", newMeal.file); // ✅ image file
 
-  await fetch("http://localhost:5000/api/meals", {
+  await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEDURL}/api/meals`, {
     method: "POST",
     body: formData,
   });
@@ -48,14 +48,14 @@ const Admin = () => {
 
 
   const deleteMeal = async (id) => {
-    await fetch(`http://localhost:5000/api/meals/${id}`, {
+    await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEDURL}/api/meals/${id}`, {
       method: "DELETE",
     });
     fetchMeals();
   };
 
   const updateStatus = async (id, newStatus) => {
-    await fetch(`http://localhost:5000/api/order/${id}`, {
+    await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEDURL}/api/order/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status: newStatus }),
@@ -212,7 +212,7 @@ const Admin = () => {
             <td className="border p-2">
               {meal.image && (
                 <img
-                  src={`http://localhost:5000/${meal.image}`}
+                  src={`${import.meta.env.VITE_REACT_APP_BACKEND_BASEDURL}/${meal.image}`}
                   alt={meal.name}
                   className="w-16 h-16 object-cover"
                 />

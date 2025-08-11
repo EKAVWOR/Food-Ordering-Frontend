@@ -1,6 +1,6 @@
 const MealCard = ({ meal, addToCart }) => {
   // This is the correct dynamic URL:
-  const imageURL = `http://localhost:5000/${meal.image.replace(/\\/g, "/")}`;
+  const imageURL = `${import.meta.env.VITE_REACT_APP_BACKEND_BASEDURL}/${meal.image.replace(/\\/g, "/")}`;
 
   return (
     <div className="border rounded-lg p-4 shadow-md bg-white flex flex-col justify-between">

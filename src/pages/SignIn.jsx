@@ -21,45 +21,21 @@ const SignIn = () => {
   
 
 
- 
-
-  // const handleSubmit = async (e) => {
-  // e.preventDefault();
-  // try {
-  //   const res = await axios.post("http://localhost:5000/api/signin", formData);
-  //   localStorage.setItem("token", res.data.token);
-  //   localStorage.setItem("role", res.data.role);
-
-  //   setMessage("Login successful");
-  //   setSuccess(true);
-
-  //   setTimeout(() => {
-  //     if (res.data.role === "admin") {
-  //       navigate("/admin");  // 👈 admin goes here
-  //     } else {
-  //       navigate("/checkout");   // 👈 normal user goes here
-  //     }
-  //   }, 1500);
-
-  // } catch (err) {
-  //   console.error(err);
-  //   setMessage(err.response?.data?.message || "Login failed");
-  //   setSuccess(false);
-  // }
 
   const handleSubmit = async (e) => {
   e.preventDefault();
   try {
-    const res = await axios.post("http://localhost:5000/api/signin", formData);
+    const res = await axios.post(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEDURL}/api/signin`, formData);
     localStorage.setItem("token", res.data.token);
     localStorage.setItem("role", res.data.role);
     localStorage.setItem("userId", res.data.userId)
+    
     
 
     setMessage("Login successful");
     setSuccess(true);
 
-    // Get cart from localStorage (or wherever you store it)
+   
     const storedCart = JSON.parse(localStorage.getItem("cartItems") || "[]");
 
     setTimeout(() => {

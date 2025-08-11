@@ -2,7 +2,7 @@ import Google from "../assets/Google.png";
 import Apple from "../assets/Apple.png";
 import { Link } from "react-router-dom";
 import { FaFacebook } from "react-icons/fa";
-import { AiFillInstagram, AiFillTikTok } from "react-icons/ai";
+import { AiFillInstagram, AiFillTikTok, AiOutlineWhatsApp } from "react-icons/ai";
 import { FaSnapchat } from "react-icons/fa6";
 
 const Footer = () => {
@@ -41,17 +41,17 @@ const Footer = () => {
           </div>
           <p className="text-[12px]">We won’t spam — read our email policy.</p>
           <div className="flex gap-4 text-xl mt-2">
-            <Link to="#">
+            <Link to="https://web.facebook.com/rebecca.arikuyeri.2025" target="_blank">
               <FaFacebook className="hover:scale-110 transition-transform" />
             </Link>
-            <Link to="#">
+            <Link to="https://instagram.com/tastewithbecca" target="_blank">
               <AiFillInstagram className="hover:scale-110 transition-transform" />
             </Link>
             <Link to="#">
-              <AiFillTikTok className="hover:scale-110 transition-transform" />
+              <AiFillTikTok className="hover:scale-110 transition-transform"  />
             </Link>
-            <Link to="#">
-              <FaSnapchat className="hover:scale-110 transition-transform" />
+            <Link to="https://wa.me/2349162480521" target="_blank">
+              <AiOutlineWhatsApp className="hover:scale-110 transition-transform" />
             </Link>
           </div>
         </div>

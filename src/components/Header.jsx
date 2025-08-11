@@ -16,7 +16,7 @@ const Header = () => {
     <div className="  md:w-[33%] md:flex hidden  p-3 items-center">
         <img className="w-5" src={location} alt="" />
         <div className="ml-2">
-            <p>Regent Street, A4, A4201, London</p>
+            <p>Abraka, police station road, Delta State.</p>
         </div>
     </div>
     <div className="font-bold text-white text-center md:w-[34%] w-[50%] bg-red-700">

@@ -21,7 +21,7 @@ const SignUp = () => {
     setMessage(""); // clear old messages
     setSuccess(false);
     try {
-      const res = await axios.post("http://localhost:5000/api/signup", formData);
+      const res = await axios.post(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEDURL}/api/signup`, formData);
       console.log(res.data);
       
       setMessage(res.data.message || "Signup successful");

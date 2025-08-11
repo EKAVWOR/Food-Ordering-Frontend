@@ -78,7 +78,7 @@ const Menu = () => {
   useEffect(() => {
     const fetchMeals = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/meals");
+        const res = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEDURL}/api/meals`);
         const data = await res.json();
         setMeals(data.meals); // adjust according to your backend response
       } catch (error) {

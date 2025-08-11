@@ -131,8 +131,8 @@ const Cart = () => {
             </div>
             <div className="text-right mt-4">
               <Link
-                // to={isLoggedIn ? "/checkout" : "/signin"}
-                to = "/checkout"
+                to={isLoggedIn ? "/checkout" : "/signin"}
+                
                 className="inline-block bg-orange-600 text-white px-6 py-3 rounded hover:bg-orange-700"
               >
                 Proceed to Checkout
